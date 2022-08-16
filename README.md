@@ -1,6 +1,6 @@
 # -Unity-Floating-Train-Prototype
 
-![Screenshot](https://github.com/RostislavGoncharov/-Unity-Floating-Train-Prototype/edit/main/Images/Screenshot_small.jpg?raw=true)
+![Screenshot](https://raw.githubusercontent.com/RostislavGoncharov/-Unity-Floating-Train-Prototype/main/Images/Screenshot_small.jpg)
  
 A prototype made in Unity/C# using Aura 2 for lighting & fog. This is essentially a fork of a different (private) repo I own. 
 
