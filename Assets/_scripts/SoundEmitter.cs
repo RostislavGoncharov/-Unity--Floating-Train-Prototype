@@ -8,4 +8,10 @@ public abstract class SoundEmitter : MonoBehaviour
     protected List<AudioClip> clips = new List<AudioClip>();
 
     public abstract void PlaySound(int clipIndex, float volume, bool fadeIn, float fadeTimeInSeconds, AnimationCurve fadeCurve);
+
+    public virtual void StopSound()
+    {
+        TryGetComponent(out AudioSource audioSource);
+        audioSource.Stop();
+    }
 }

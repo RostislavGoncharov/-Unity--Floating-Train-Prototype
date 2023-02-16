@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    private PlayerInput playerInput;
+    private InputAction quitAction;
 
     private void Awake()
     {
@@ -17,11 +22,14 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
+        playerInput = GetComponent<PlayerInput>();
+        quitAction = playerInput.actions["Quit"];
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (quitAction.IsPressed())
         {
             Application.Quit();
         }

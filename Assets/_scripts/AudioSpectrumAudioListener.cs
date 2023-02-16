@@ -1,17 +1,16 @@
 /*
  * This is the base class for audio visualization. 
- * It takes the output of an audio source, splits it into frequency bands, and applies band buffers.
+ * It takes the sound incoming into the audio listener, splits it into frequency bands, and applies band buffers.
  * Band buffers provide smoothing for value changes, so that the visuals don't jump from higher to lower values immediately.
- * This class should be attached to the audio source that is supposed to affect audio visualization.
- * In this version of the script, only one audio source with this class attached will control the audio visualization properly.
+ * This class can be attached to any object in the scene. 
+ * Use this version of the script if you want ALL sounds in the scene to affect audio visualization.
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
-public class AudioSpectrum : MonoBehaviour
+public class AudioSpectrumAudioListener : MonoBehaviour
 {
     public static float[] samples = new float[512];
     public static float[] freqBands = new float[8];
@@ -22,16 +21,9 @@ public class AudioSpectrum : MonoBehaviour
     [SerializeField] float defaultBufferDecreaseValue = 0.005f;
     [SerializeField] float bufferDecreaseMultiplier = 1.2f;
 
-    AudioSource audioSource;
-    
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
     void Update()
     {
-        audioSource.GetSpectrumData(samples, 0, FFTWindow.BlackmanHarris);
+        AudioListener.GetSpectrumData(samples, 0, FFTWindow.BlackmanHarris);
         GetFrequencyBands();
         UseBandBuffer();
     }
